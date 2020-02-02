@@ -1,13 +1,13 @@
 name: flutter_mobx_helpers
 description: A set of tools for MobX that helps you with common processes making everything easier.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Flutterando/flutter_mobx_helpers.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  mobx: ">=0.4.0 <1.0.0"
+  mobx: ">=1.0.0 <2.0.0"
   flutter:
     sdk: flutter
 

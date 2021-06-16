@@ -4,10 +4,10 @@ version: 1.0.1
 homepage: https://github.com/Flutterando/flutter_mobx_helpers.git
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
-  mobx: ">=1.0.0 <2.0.0"
+  mobx: ^2.0.1
   flutter:
     sdk: flutter
 

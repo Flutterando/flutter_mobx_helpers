@@ -5,7 +5,7 @@ class MyStore = _MyStoreBase with _$MyStore;
 
 abstract class _MyStoreBase with Store {
   @observable
-  int value;
+  int value = 0;
   @action
   setValue() => value++;
 }

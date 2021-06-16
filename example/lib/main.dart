@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -37,19 +37,20 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       key: _scaffold,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title ?? ''),
       ),
       body: Center(
-          child: ObserverListener(
-        listener: (_) {
-          var snack = SnackBar(content: Text('Click ${store.value}'));
-          _scaffold.currentState.showSnackBar(snack);
-        },
-        child: RaisedButton(
-          child: Text('Call Snackbar'),
-          onPressed: store.setValue,
+        child: ObserverListener(
+          listener: (_) {
+            var snack = SnackBar(content: Text('Click ${store.value}'));
+            ScaffoldMessenger.of(context).showSnackBar(snack);
+          },
+          child: ElevatedButton(
+            child: Text('Call Snackbar'),
+            onPressed: store.setValue,
+          ),
         ),
-      )),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: store.setValue,
         tooltip: 'Increment',

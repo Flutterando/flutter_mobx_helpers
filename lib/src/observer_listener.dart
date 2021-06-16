@@ -4,35 +4,38 @@ import 'package:mobx/src/core.dart' show ReactionImpl;
 
 class ObserverListener extends StatefulWidget {
   final Widget child;
-  final String name;
+  final String? name;
   final void Function(Reaction) listener;
 
-  const ObserverListener(
-      {Key key, @required this.child, @required this.listener, this.name})
-      : super(key: key);
+  const ObserverListener({
+    Key? key,
+    required this.child,
+    required this.listener,
+    this.name,
+  }) : super(key: key);
 
   @override
   _ObserverListenerState createState() => _ObserverListenerState();
 }
 
 class _ObserverListenerState extends State<ObserverListener> {
-  ReactionDisposer _reactionDisposerForListener;
+  ReactionDisposer? _reactionDisposerForListener;
 
-  ReactionImpl get reactionListener =>
-      _reactionDisposerForListener.reaction as ReactionImpl;
+  ReactionImpl get reactionListener => _reactionDisposerForListener?.reaction as ReactionImpl;
 
   @override
   void dispose() {
-    _reactionDisposerForListener();
+    if (_reactionDisposerForListener != null)
+      _reactionDisposerForListener!();
     super.dispose();
   }
 
   _initAutorun() async {
     if (_reactionDisposerForListener != null) {
-      _reactionDisposerForListener();
+      _reactionDisposerForListener!();
     }
-    _reactionDisposerForListener = autorun(widget.listener,
-        delay: 300, name: widget.name ?? 'ObserverListener');
+    _reactionDisposerForListener =
+        autorun(widget.listener, delay: 300, name: widget.name ?? 'ObserverListener');
     await Future.delayed(Duration(milliseconds: 301));
 
     if (!reactionListener.hasObservables) {
